@@ -43,26 +43,7 @@ int getint(){
 	}
 	return t*flag;
 }
-
-void matrixsidling(vector<vector<int>> A)
-{
-    int m=A.size(), n=A[0].size();
-    int i=0, j=n-1;
-    for(int ii=1;ii<=m+n-1;ii++)
-    {
-        for(int k=0;i+k<m && j+k<n;k++)
-            cout<<A[i+k][j+k]<<" ";
-        cout<<endl;
-        if(j>=1) j--;
-        else if(i<m-1) i++;
-    }
-}
-struct x
-{
-    long english;
-    short* cost[7];
-    struct x*next, *last;
-};
+string v[4];
 int main()
 {
 /*
@@ -71,10 +52,22 @@ int main()
     freopen ("out.txt" , "w" , stdout);
 #endif
 */
-    //short a='\077';
-    //cout<<sizeof(struct x);
-    //cout<<d[0].a+d[1].b-d[1].a;
-    vector<vector<int>> A={{1,2,3},{4,5,6},{7,8,9}};
-    matrixsidling(A);
+    string str;
+    for(int i=0;i<4;i++) cin>>str, v[i]=str.substr(2);
+    //memset(v, 0 ,sizeof v);
+    vector<int> ans;
+    for(int i=0;i<4;i++)
+    {
+        bool shorter=1, longer=1;
+        for(int j=0;j<4;j++)
+        {
+            if(j==i) continue;
+            if(!(v[i].size()>=2*v[j].size())) longer=0;
+            if(!(v[j].size()>=2*v[i].size())) shorter=0;
+        }
+        if(longer || shorter) ans.push_back(i);
+    }
+    if(ans.size()==1) cout<<char(ans[0]+'A')<<endl;
+    else cout<<'C'<<endl;
 	return 0;
 }

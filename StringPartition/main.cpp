@@ -44,25 +44,45 @@ int getint(){
 	return t*flag;
 }
 
-void matrixsidling(vector<vector<int>> A)
+string Partition(string s)
 {
-    int m=A.size(), n=A[0].size();
-    int i=0, j=n-1;
-    for(int ii=1;ii<=m+n-1;ii++)
+    list<char> l;
+    for(auto e: s) l.push_back(e);
+    auto it1=l.begin();
+    for(;it1!=l.end();it1++) if(*it1!='*') break;
+    auto last=it1;
+    for(auto it=it1;it!=l.end();)
     {
-        for(int k=0;i+k<m && j+k<n;k++)
-            cout<<A[i+k][j+k]<<" ";
-        cout<<endl;
-        if(j>=1) j--;
-        else if(i<m-1) i++;
+        if(*it=='*')
+        {
+            l.insert(last, *it);
+            it=l.erase(it);
+        }
+        else it++;
     }
+    string ans;
+    for(auto e: l) ans.push_back(e);
+    return ans;
 }
-struct x
+
+
+//chenshuo
+string Partition_ChenShuo(string str)
 {
-    long english;
-    short* cost[7];
-    struct x*next, *last;
-};
+  auto it = remove(str.rbegin(), str.rend(), '*');
+  fill(it, str.rend(), '*');
+  return str;
+}
+
+//laozhao
+string Partition_LaoZhao(string str)
+{
+    int cnt=0;
+    for(auto e: str) if(e=='*') cnt++;
+    string ans(cnt, '*');
+    for(auto e: str) if(e!='*') ans.push_back(e);
+    return ans;
+}
 int main()
 {
 /*
@@ -71,10 +91,7 @@ int main()
     freopen ("out.txt" , "w" , stdout);
 #endif
 */
-    //short a='\077';
-    //cout<<sizeof(struct x);
-    //cout<<d[0].a+d[1].b-d[1].a;
-    vector<vector<int>> A={{1,2,3},{4,5,6},{7,8,9}};
-    matrixsidling(A);
+    string str="aaaaa***aa*a.abb..*a";
+    auto ans=Partition_LaoZhao(str);cout<<ans<<endl;
 	return 0;
 }
