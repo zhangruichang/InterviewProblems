@@ -43,45 +43,23 @@ int getint(){
 	}
 	return t*flag;
 }
-
-void matrixsidling(vector<vector<int>> A)
+int GCD(int m, int n)
 {
-    int m=A.size(), n=A[0].size();
-    int i=0, j=n-1;
-    for(int ii=1;ii<=m+n-1;ii++)
+    if(!m) return n;
+    return GCD(n%m, m);//yushu and chushu
+}
+bool ValidFraction(int n, int p, int q)//gcd(p, q)=1, and p<=q
+{
+    int sum=(1<<n);//n<=31
+    if(!p) return q==sum;
+    for(int i=0;i<=sum;i++)
     {
-        for(int k=0;i+k<m && j+k<n;k++)
-            cout<<A[i+k][j+k]<<" ";
-        cout<<endl;
-        if(j>=1) j--;
-        else if(i<m-1) i++;
+        int gcd=GCD(i, sum);
+        if(gcd && (i/gcd==p && sum/gcd==q)) return 1;
     }
+    return 0;
 }
 
-void MatrixSidingN(int n)
-{
-    for(int i=1;i<=2*n-1;i++)
-    {
-        if(i<n)
-        {
-            for(int j=1;j<=i;j++)
-                cout<<n+1-i+(j-1)*(n+1)<<" ";
-            cout<<endl;
-        }
-        else
-        {
-            for(int j=1;j<=(2*n-i);j++)
-                cout<<1+(i-n)*n+(j-1)*(n+1)<<" ";
-            cout<<endl;
-        }
-    }
-}
-struct x
-{
-    long english;
-    short* cost[7];
-    struct x*next, *last;
-};
 int main()
 {
 /*
@@ -90,12 +68,7 @@ int main()
     freopen ("out.txt" , "w" , stdout);
 #endif
 */
-    //short a='\077';
-    //cout<<sizeof(struct x);
-    //cout<<d[0].a+d[1].b-d[1].a;
-    //vector<vector<int>> A={{1,2,3},{4,5,6},{7,8,9}};
-    //matrixsidling(A);
-	int n=2;
-	MatrixSidingN(n);
+    //cout<<ValidFraction(2, 0, 4);
+	cout<<GCD(31488, 123);
 	return 0;
 }
