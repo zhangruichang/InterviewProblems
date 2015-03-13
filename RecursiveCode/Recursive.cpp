@@ -1,3 +1,5 @@
+http://www.cnblogs.com/archimedes/p/recursive-practice.html
+
 int Bin(int a[], int low, int high, int x)
 {
 	if(low>high) return -1;
@@ -28,12 +30,21 @@ int Dig(int n)
 
 int DigRoot(int n)
 {
-	int sum=0;
+	int sum=Dig(n);
+	if(sum<10) return sum;
+	return DigRoot(sum);
+}
+/*
+{
+	int sum=Dig(n);
 	while(sum>=10)
 	{
+		sum=Dig(n);
+		/*
 		int tmp=sum;
 		while(tmp>0)
 			sum+=tmp%10, tmp/=10;
+		
 	}
 	return sum;
-}
+}*/
