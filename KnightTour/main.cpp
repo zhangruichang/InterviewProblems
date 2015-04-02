@@ -36,7 +36,12 @@ int n, m;
 vector<pii> cur;
 int v[maxn][maxn];
 int Out[maxn][maxn];
+/*
+const int dx[] = {-2,-2,2,2,-1,-1,1,1};
+const int dy[] = {1,-1,1,-1,2,-2,2,-2};
+*/
 const int dx[8]={-2, -1, 1, 2, 2, 1, -1, -2}, dy[8]={1, 2 ,2,1, -1, -2, -2, -1};
+
 bool out(int i, int j)
 {
     if(i>=n || i<0 || j>=m || j<0) return 1;
@@ -44,8 +49,6 @@ bool out(int i, int j)
 }
 bool dfs(int i, int j, int cnt)
 {
-    //cout<<i<<" "<<j<<endl;
-
     if(out(i, j) || v[i][j]) return 0;
     if(cnt==n*m) return 1;
     v[i][j]=1;
@@ -71,10 +74,9 @@ int main()
     while(cin>>n>>m)
     {
         bool ok=0;
+        memset(v,0, sizeof(v));cur.clear();
         for(int i=0;i<n;i++) for(int j=0;j<m;j++)
         {
-            cur.clear();
-            memset(v,0, sizeof(v));
             cur.push_back({i, j});
             if(dfs(i, j, 1)) {ok=1;goto L1;}
             cur.pop_back();
