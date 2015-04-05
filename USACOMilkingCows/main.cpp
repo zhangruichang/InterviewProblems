@@ -1,6 +1,7 @@
 /*
-Author: richard
-Contact: zhangruichang112@gmail.com
+ID: zhangru14
+PROG: milk2
+LANG: C++11
 */
 #include<set>
 #include<map>
@@ -65,11 +66,11 @@ int main()
 {
 
 //#ifndef ONLINE_JUDGE
-    freopen ("milk2.in" , "r" , stdin);
-    freopen ("milk2.out" , "w" , stdout);
+    //freopen ("milk2.in" , "r" , stdin);
+    //freopen ("milk2.out" , "w" , stdout);
 //#endif
 
-    while(cin>>n)//0 means start, 1 means end
+    cin>>n;//0 means start, 1 means end
     {
         v.clear();int x, y;
         for(int i=0;i<n;i++) cin>>x>>y, v.push_back({x, 0}), v.push_back({y, 1});
