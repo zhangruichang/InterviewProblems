@@ -90,6 +90,8 @@ int main()
 #endif
 */
     int n,m;
+    string s="zrc";
+    cout<<s.substr(0, 10)<<endl;
     while(cin>>n>>m)
     {
         int dp[n+1][m+1];
