@@ -62,60 +62,49 @@ LL MultMod(LL a,LL b,LL MOD)
 }
 int a[maxn], n, t, m;
 
-bool IsSubSequence(string str, string pat)
+vector<string> dfs(int i)
 {
-    int strn=str.size(), patn=pat.size(), i, j;
-    for(i=0, j=0; i<strn && j<patn; )
+    if(i==1) return {"0","1","2","3","4","5","6","7","8","9"};
+    vector<string> post, cur=dfs(i-1);
+    for(int j=0;j<10;j++)
     {
-        if(str[i]==pat[j]) i++, j++;
-        else i++;
-    }
-    return j==patn;
-}
-void GetNext(string pat);
-int Next[maxn];
-bool IsSubString(string str, string pat)
-{
-    //cout<<"zhang"<<endl;
-    GetNext(pat);
-    //cout<<"zhang"<<endl;
-    int strn=str.size(), patn=pat.size();
-    int i=0, j=0;
-    while(i<strn && j<patn)
-    {
-        if(j==-1 || str[i]==pat[j])
-            i++, j++;
+        if(j%2==0)
+            for(int k=0;k<cur.size();k++) post.push_back(to_string(j)+cur[k]);
         else
-            j=Next[j];
-        //if(j==patn) return 1;
+            for(int k=(int)cur.size()-1;k>=0;k--) post.push_back(to_string(j)+cur[k]);
     }
-    return j==patn;
+    return post;
 }
-
-
-
-void GetNext(string pat)
-{
-    Next[0]=-1;
-    int n=pat.size();
-    for(int i=0;i<=n-2;i++)
-    {
-        int k=Next[i];
-        while(k!=-1 && pat[k]!=pat[i])
-            k=Next[k];
-        Next[i+1]=k+1;//Next[k+1]=k+1, typos here
-    }
-}
-
 int main()
 {
-/*
+
 #ifndef ONLINE_JUDGE
-    freopen ("in.txt" , "r" , stdin);
-    freopen ("out.txt" , "w" , stdout);
+    //freopen ("in.txt" , "r" , stdin);
+    //freopen ("out.txt" , "w" , stdout);
 #endif
-*/
-    string str="abcb", pat="ab";
-    cout<<IsSubSequence(str, pat)<<endl;
+
+    /*
+    while(cin>>n)
+    {
+        vector<string> cur({"0","1","2","3","4","5","6","7","8","9"});
+        for(int i=1;i<n;i++)
+        {
+            vector<string> post;
+            for(int j=0;j<10;j++)
+            {
+                if(j%2==0)
+                    for(int k=0;k<cur.size();k++) post.push_back(to_string(j)+cur[k]);
+                else
+                    for(int k=(int)cur.size()-1;k>=0;k--) post.push_back(to_string(j)+cur[k]);
+            }
+            cur=post;
+        }
+        for(auto e : cur) cout<<e<<endl;
+    }*/
+    while(cin>>n)
+    {
+        auto ans=dfs(n);
+        for(auto e: ans) cout<<e<<endl;
+    }
 	return 0;
 }

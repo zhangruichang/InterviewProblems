@@ -62,48 +62,17 @@ LL MultMod(LL a,LL b,LL MOD)
 }
 int a[maxn], n, t, m;
 
-bool IsSubSequence(string str, string pat)
+void PrintDouble(double x, int dig)
 {
-    int strn=str.size(), patn=pat.size(), i, j;
-    for(i=0, j=0; i<strn && j<patn; )
+    int xi=(int)x;
+    x-=xi;
+    cout<<xi<<".";
+    double epsilon=1e-8;
+    //int digi=0;
+    while(x>=epsilon && dig)
     {
-        if(str[i]==pat[j]) i++, j++;
-        else i++;
-    }
-    return j==patn;
-}
-void GetNext(string pat);
-int Next[maxn];
-bool IsSubString(string str, string pat)
-{
-    //cout<<"zhang"<<endl;
-    GetNext(pat);
-    //cout<<"zhang"<<endl;
-    int strn=str.size(), patn=pat.size();
-    int i=0, j=0;
-    while(i<strn && j<patn)
-    {
-        if(j==-1 || str[i]==pat[j])
-            i++, j++;
-        else
-            j=Next[j];
-        //if(j==patn) return 1;
-    }
-    return j==patn;
-}
-
-
-
-void GetNext(string pat)
-{
-    Next[0]=-1;
-    int n=pat.size();
-    for(int i=0;i<=n-2;i++)
-    {
-        int k=Next[i];
-        while(k!=-1 && pat[k]!=pat[i])
-            k=Next[k];
-        Next[i+1]=k+1;//Next[k+1]=k+1, typos here
+        x*=10, cout<<(int)x, x-=(int)x;
+        dig--;
     }
 }
 
@@ -115,7 +84,7 @@ int main()
     freopen ("out.txt" , "w" , stdout);
 #endif
 */
-    string str="abcb", pat="ab";
-    cout<<IsSubSequence(str, pat)<<endl;
+    double x=1.35253264234;
+    PrintDouble(x, 10);
 	return 0;
 }
