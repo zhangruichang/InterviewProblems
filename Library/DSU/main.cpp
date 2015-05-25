@@ -79,6 +79,23 @@ void Union(int x, int y)
         a[x]=y, rank[x]++;
 }
 
+inline vector<int> Split(char* s, char delim)
+{
+    vector<int> ans;
+    string cur;
+    int len=strlen(s);
+    for(int i=0;i<len;i++)
+    {
+        if(s[i]==delim)
+        {
+            ans.push_back(stoi(cur));
+            cur.clear();
+        }
+        else cur.push_back(s[i]);
+    }
+    ans.push_back( stoi(cur) );
+    return ans;
+}
 void MakeSet()
 {
     memset(a, -1, sizeof a);
