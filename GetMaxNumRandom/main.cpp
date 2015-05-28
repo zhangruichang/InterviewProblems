@@ -60,56 +60,20 @@ LL MultMod(LL a,LL b,LL MOD)
     }
     return ret;
 }
+int a[maxn], n, t, m;
 
-int a[maxn], Rank[maxn], n, t, m;
-
-int Find(int x)
+int GetRandomMax(int a[], int n)
 {
-    return a[x]==-1 ? x : (a[x]=Find(a[x]));
-}
-
-void Union(int x, int y)
-{
-    int rx=Find(x), ry=Find(y);
-    if(Rank[x] < Rank[y])
-        a[x]=y;
-    else if(Rank[x] > Rank[y])
-        a[y]=x;
-    else
-        a[x]=y, Rank[x]++;
-}
-int stoi(string s)
-{
-    int num=0;
-    for(auto e: s) num=num*10+e-'0';
-    return num;
-}
-inline vector<int> Split(char* s, char delim)
-{
-    vector<int> ans;
-    string cur;
-    int len=strlen(s);
-    for(int i=0;i<len;i++)
+    int maxx=INT_MIN, pos=-1, num=0;
+    for(int i=0;i<n;i++)
     {
-        if(s[i]==delim)
-        {
-            ans.push_back(stoi(cur));
-            cur.clear();
-        }
-        else cur.push_back(s[i]);
+        if(a[i]<maxx) continue;
+        if(a[i]>maxx) {maxx=a[i], num=1;}
+        else num++;
+        if(rand()%num==0) pos=i;
     }
-    ans.push_back( stoi(cur) );
-    return ans;
+    return pos;
 }
-void MakeSet()
-{
-    memset(a, -1, sizeof a);
-    fill_n(Rank, maxn, 1);
-}
-//  -1 -1 -1 -1
-//-1 0xFFFFFFFF
-// 1 0x00000001
-
 int main()
 {
 /*
@@ -118,12 +82,12 @@ int main()
     freopen ("out.txt" , "w" , stdout);
 #endif
 */
-    int n=6;
-    for(int i=0;i<(1<<n);i++)
+    cin>>t;
+    for(int ti=1;ti<=t;ti++)
     {
-        string cur;int tmp=i;
-        for(int j=0;j<6;j++) cur.push_back(tmp%2+'0'), tmp/=2;
-        cout<<cur<<endl;
+        cin
+        printf("Case #%d:\n", ti);
+        cout
     }
 	return 0;
 }
